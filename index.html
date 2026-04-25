@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Marketplace</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Community Marketplace</h1>
+        <p>Buy, sell, and discover items without Facebook.</p>
+      </div>
+      <button id="seedButton" class="secondary">Load demo listings</button>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>Create listing</h2>
+        <form id="listingForm">
+          <label>
+            Title
+            <input name="title" maxlength="70" required />
+          </label>
+
+          <label>
+            Price ($)
+            <input name="price" type="number" min="0" step="0.01" required />
+          </label>
+
+          <label>
+            Category
+            <select name="category" required>
+              <option value="Furniture">Furniture</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Home">Home</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Vehicles">Vehicles</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            Location
+            <input name="location" maxlength="50" placeholder="City, State" required />
+          </label>
+
+          <label>
+            Description
+            <textarea name="description" rows="4" maxlength="260" required></textarea>
+          </label>
+
+          <label>
+            Image URL (optional)
+            <input
+              name="image"
+              type="url"
+              placeholder="https://example.com/item.jpg"
+            />
+          </label>
+
+          <button type="submit">Post listing</button>
+        </form>
+      </section>
+
+      <section class="panel listings-panel">
+        <div class="listings-header">
+          <h2>Listings</h2>
+          <button id="clearButton" class="danger">Clear all</button>
+        </div>
+
+        <div class="filters">
+          <input
+            id="searchInput"
+            placeholder="Search title, location, description"
+            aria-label="Search listings"
+          />
+          <select id="categoryFilter" aria-label="Filter by category">
+            <option value="All">All categories</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Home">Home</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Vehicles">Vehicles</option>
+            <option value="Other">Other</option>
+          </select>
+          <select id="sortBy" aria-label="Sort listings">
+            <option value="newest">Newest</option>
+            <option value="priceLow">Price: low to high</option>
+            <option value="priceHigh">Price: high to low</option>
+          </select>
+        </div>
+
+        <div id="listingsGrid" class="listings-grid"></div>
+      </section>
+    </main>
+
+    <template id="listingCardTemplate">
+      <article class="listing-card">
+        <img class="listing-image" alt="Listing image" />
+        <div class="listing-content">
+          <div>
+            <h3 class="listing-title"></h3>
+            <p class="listing-price"></p>
+            <p class="listing-meta"></p>
+          </div>
+          <p class="listing-description"></p>
+          <div class="actions">
+            <button class="secondary contact-button">Contact seller</button>
+            <button class="danger delete-button">Delete</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <dialog id="contactDialog">
+      <form method="dialog" class="contact-form">
+        <h3>Contact seller</h3>
+        <p id="contactListingName"></p>
+        <label>
+          Your message
+          <textarea id="contactMessage" rows="5" required></textarea>
+        </label>
+        <menu>
+          <button value="cancel" class="secondary">Cancel</button>
+          <button id="sendContactButton" value="default">Send</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
